@@ -694,7 +694,7 @@ class ScannerWindow(QMainWindow):
         QMessageBox.about(
             self,
             f"About {QApplication.applicationName()}",
-            "iNetScan\nVersion 0.4.5\n© 2025 iNetScan Contributors"
+            "iNetScan\nVersion 0.4.6\n© 2025 iNetScan Contributors"
         )
 
     def reenable_scan_buttons(self):
