@@ -55,9 +55,17 @@ doas python3 inetscan-v0.4.5.py
 
 Install dependencies:
 
-```sh
 brew install nmap rustscan python3
-pip3 install PyQt6 pandas manuf
+
+### Option 1: Recommended — use a virtual environment
+```
+python3 -m venv venv
+source venv/bin/activate
+pip install PyQt6 pandas manuf zeroconf
+```
+### Option 2: Install globally (not recommended)
+```
+pip3 install PyQt6 pandas manuf zeroconf --break-system-packages
 ```
 
 Then:
