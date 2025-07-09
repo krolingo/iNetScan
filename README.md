@@ -49,7 +49,7 @@ Then:
 ```sh
 git clone https://github.com/YOUR_USERNAME/inet-scan.git
 cd inet-scan
-doas python3 inetscan-v0.4.5.py
+doas python3 inetscan.py
 ```
 ### macOS (via Homebrew)
 
@@ -73,7 +73,7 @@ Then:
 ```sh
 git clone https://github.com/YOUR_USERNAME/inet-scan.git
 cd inet-scan
-sudo python3 inetscan-v0.4.5.py
+sudo python3 inetscan.py
 ```
 
 ## ⚙️ Configuring Nmap and RustScan Paths
