@@ -97,10 +97,9 @@ class MDNSWorker(QThread):
                 if info:
                     instance_listener.hosts[name] = info
 
-        # Build host entries keyed by IP
+        # Skip entries with no lookup info
         hosts = {}
         for name, info in instance_listener.hosts.items():
-            # Skip entries with no lookup info
             if info is None or not getattr(info, 'addresses', None):
                 continue
             ip = ".".join(str(b) for b in info.addresses[0])

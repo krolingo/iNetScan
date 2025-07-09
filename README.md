@@ -17,6 +17,17 @@
 - 💈 Qt6 GUI with real-time scan feedback and progress bar  
 - 🧪 Per-host port scan with selectable modes (Quick / Advanced / Custom)  
 
+## Recent Changes
+
+- **Toggleable Stop Buttons:** Both **Scan** and **Deep Scan** buttons now switch to “Stop” while a scan is running, and reliably revert to “Scan”/“Deep Scan” once the scan (including mDNS resolution) completes or is cancelled.
+- **Unified Multi-Phase Progress Bar:** Scans now use a segmented progress animation with two distinct phases: host discovery and mDNS resolution — ensuring the bar progresses smoothly and never stalls.
+- **UI Unblock:** The mDNS worker always emits a `mdns_done` signal, ensuring the spinner and progress bar are stopped cleanly at the end of scanning.
+- **mDNS Signals:** The mDNS worker now emits both `mdns_done` (on completion) and `host_found` (for partial updates), enabling consistent and incremental UI updates.
+- **Per-Host Scan Progress:** A new progress indicator and disabled state are shown when scanning ports for individual hosts, providing clear visual feedback per scan.
+- **System Tray Notifications:[NOT YET WORKING]** <s>Critical errors (e.g. scan failure) now optionally will trigger a desktop notification via the system tray icon.</s>
+- **Updated Status Bar Font:** The status bar uses the platform’s default sans-serif font with a muted style for consistency.
+
+
 ## Disclaimer
 
 > **This is a work-in-progress app.**  
