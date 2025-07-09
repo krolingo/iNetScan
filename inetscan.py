@@ -549,7 +549,7 @@ class ScannerWindow(QMainWindow):
         combo_layout = QHBoxLayout(combo_widget)
         combo_layout.setContentsMargins(0, 0, 0, 0)
         combo_layout.setSpacing(4)
-        # Use fixed size for the buttons so they don’t stretch
+        # Use fixed size for the buttons so they don't stretch
         self.scan_btn.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
         self.advanced_scan_btn.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
         # Remove setAlignment; use stretch for left alignment below
@@ -654,8 +654,8 @@ class ScannerWindow(QMainWindow):
         self.detail_pane.addWidget(self.log_area)
 
         # make the top (detail_area) non-stretching, and the bottom (log_area) take all the extra
-        self.detail_pane.setStretchFactor(0, 0)   # detail_area gets 0× of the extra space
-        self.detail_pane.setStretchFactor(1, 1)   # log_area  gets 1× of the extra space
+        self.detail_pane.setStretchFactor(0, 0)   # detail_area gets 0x of the extra space
+        self.detail_pane.setStretchFactor(1, 1)   # log_area  gets 1x of the extra space
 
 
         # Prevent the details area from collapsing below its minimum height
@@ -688,7 +688,7 @@ class ScannerWindow(QMainWindow):
 
         self.host_port_threads = {}
         self.scan_thread = None
-        self.statusBar().showMessage("Ready to scan – click ‘Scan’ or ‘Deep Scan’ to begin")
+        self.statusBar().showMessage("Ready to scan - click 'Scan' or 'Deep Scan' to begin")
 
         self.progress = QProgressBar(self)
         self.progress.hide()
@@ -962,7 +962,7 @@ class ScannerWindow(QMainWindow):
         QTimer.singleShot(200, lambda: self._execute_scan_passes(index + 1))
 
     def _start_mdns(self):
-        # During advanced scan’s Bonjour, show spinner; otherwise hide it
+        # During advanced scan's Bonjour, show spinner; otherwise hide it
         if self.advanced_mode:
             self.spinner_label.show()
             self.spinner_timer.start(100)
@@ -1376,7 +1376,7 @@ class ScannerWindow(QMainWindow):
         self.statusBar().showMessage(f"Found {len(self.hosts)} hosts")
         # Update progress bar with number of hosts discovered
         self.progress.setValue(len(self.hosts))
-        # ←——– update the Hosts: # label
+        # ←——- update the Hosts: # label
         self.host_count_label.setText(f"Hosts: {len(self.hosts)}")
 
     def apply_filter(self, text):
