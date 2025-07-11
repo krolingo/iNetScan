@@ -39,12 +39,23 @@ class ElidedLabel(QLabel):
         super().__init__(*args, **kwargs)
         # Allow the label to expand horizontally
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
+        # Enable text selection/copy by mouse and keyboard
+        self.setTextInteractionFlags(
+            Qt.TextInteractionFlag.TextSelectableByMouse | Qt.TextInteractionFlag.TextSelectableByKeyboard
+        )
+        # Allow focus by click so keyboard copy works
+        self.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
+
     def paintEvent(self, event):
-        painter = QPainter(self)
-        fm = QFontMetrics(self.font())
-        # Compute elided text based on current width
-        elided = fm.elidedText(self.text(), Qt.TextElideMode.ElideRight, self.width())
-        painter.drawText(self.rect(), self.alignment(), elided)
+        # When focused or has selected text, use default QLabel rendering to allow copy/select
+        if self.hasFocus() or self.hasSelectedText():
+            super().paintEvent(event)
+        else:
+            painter = QPainter(self)
+            fm = QFontMetrics(self.font())
+            # Compute elided text based on current width
+            elided = fm.elidedText(self.text(), Qt.TextElideMode.ElideRight, self.width())
+            painter.drawText(self.rect(), self.alignment(), elided)
 from bonjour_gui import BonjourWindow
 
 # --- Local imports ---
@@ -665,10 +676,11 @@ class ScannerWindow(QMainWindow):
         # Optionally set initial splitter sizes (detail_area larger, log_area smaller)
         self.detail_pane.setSizes([self.height() - 200, 200])
 
-        # Wrap host list in a native tab for "Host"
+# TABS
+        # Wrap host list in a native tab for "Hosts"
         self.left_tabs = QTabWidget()
         self.left_tabs.setTabPosition(QTabWidget.TabPosition.North)
-        self.left_tabs.addTab(self.tree, "Host")
+        self.left_tabs.addTab(self.tree, "Hosts")
         # Constrain left column width to prevent it expanding past its scrollbar
         self.left_tabs.setMaximumWidth(self.tree.maximumWidth())
         self.left_tabs.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Expanding)
@@ -756,7 +768,7 @@ class ScannerWindow(QMainWindow):
         QMessageBox.about(
             self,
             f"About {QApplication.applicationName()}",
-            "iNetScan\nVersion 0.4.9\n© 2025 iNetScan Contributors"
+            "iNetScan\nVersion 0.5.0\n© 2025 iNetScan Contributors"
         )
 
     def reenable_scan_buttons(self):
